@@ -2,14 +2,17 @@ import { Request, Response } from "express";
 import User from "../../models/User";
 
 export const cadastro_user = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+    console.log('bateu aqui')
+    const { email, password, nickname, name } = req.body;
 
-  const user = new User({
-    email,
-    password,
-  });
+    const user = await User.create({
+        nickname,
+        name, 
+        email,
+        password,
+    });
 
-  await user.save();
+    await user.save();
 
-  res.status(201).json(user);
+    res.status(201).json(user);
 }
