@@ -1,0 +1,35 @@
+name: mello-api
+services:
+  mello-api:
+    container_name: mello-api
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - ${API_PORT}:${API_PORT}
+    restart: on-failure
+    command: npm run dev
+    depends_on:
+      - mello-db
+    env_file:
+      - .env
+  mello-db:
+    container_name: mello-db
+    image: mongo
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - mello-db-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      
+volumes:
+  mello-db-data:
