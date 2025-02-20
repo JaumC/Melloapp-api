@@ -18,8 +18,6 @@ export const cadastro_user = async (req: Request, res: Response) => {
     
     const salt = await bcrypt.genSalt();
     const pass_hashed = await bcrypt.hash(password, salt);
-    
-    console.log(email, pass_hashed, nick, name, profilePic);
 
     const new_user = await User.create({
         nickname: nick,
