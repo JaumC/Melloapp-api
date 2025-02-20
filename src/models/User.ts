@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const UserSchema = new Schema({
     profilePic:{
         type: String,
-        required: true,
+        default: null,
     },
     nickname:{
         type: String,

@@ -16,6 +16,7 @@ services:
       - mello-db
     env_file:
       - .env
+
   mello-db:
     container_name: mello-db
     image: mongo
@@ -23,13 +24,26 @@ services:
     env_file:
       - .env
     ports:
-      - ${DB_PORT}:${DB_PORT}
+      - "27017:27017" 
     volumes:
       - mello-db-data:/data/db
     environment:
       MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-      
+
+  mongo_express:
+    container_name: mongo_express
+    image: mongo-express
+    restart: always
+    depends_on:
+      - mello-db
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://root:admin123@mello-db:27017/?authSource=admin
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
 volumes:
   mello-db-data:
