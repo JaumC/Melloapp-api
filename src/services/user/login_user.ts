@@ -23,7 +23,7 @@ export const login_user = async (req: Request, res: Response) => {
   const compare_pass = await bcrypt.compare(password, user.password);
 
   if(!compare_pass) {
-      res.status(400).json({ message: 'Senha incorreta! 🚨' });
+      res.status(400).json({ message: 'Senha incorreta!' });
       return;
   }
 
