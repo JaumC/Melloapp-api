@@ -3,6 +3,15 @@ import User from "../../models/User";
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
+import multer from 'multer';
+
+export const upload = multer({
+    storage,
+    fileFilter,
+    limits: {
+        fileSize: 1024 * 1024 * 5 // Limite de 5 MB
+    }},
+
 export const create_user = async (req: Request, res: Response) => {
     const { email, password, nick, name, profilePic } = req.body;
     
