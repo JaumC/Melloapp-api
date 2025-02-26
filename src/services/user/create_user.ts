@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import User from "../../models/User";
 import bcrypt from 'bcryptjs';
+import { v4 as uuidv4 } from 'uuid';
 
-export const cadastro_user = async (req: Request, res: Response) => {
+export const create_user = async (req: Request, res: Response) => {
     const { email, password, nick, name, profilePic } = req.body;
     
     
@@ -19,12 +20,15 @@ export const cadastro_user = async (req: Request, res: Response) => {
     const salt = await bcrypt.genSalt();
     const pass_hashed = await bcrypt.hash(password, salt);
 
+    const search_id = uuidv4().slice(0, 8);
+
     const new_user = await User.create({
         nickname: nick,
         name: name,
         email: email,
         password: pass_hashed,
         profilePic: profilePic,
+        search_id: search_id,
     });
 
     if(!new_user) {
