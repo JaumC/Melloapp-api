@@ -8,11 +8,6 @@ export const create_user = async (req: Request, res: Response) => {
     const { email, password, nickname, name } = req.body;
     const file = req.file;
 
-    console.log(email)
-    console.log(password)
-    console.log(nickname)
-    console.log(name)
-
     if (!email || !password || !nickname || !name) {
         res.status(400).json({ message: 'Campos faltando.' });
         return;
