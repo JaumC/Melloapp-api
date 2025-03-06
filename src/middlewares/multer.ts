@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         console.log('Salvando Arquivo: ', file.originalname)
-        cb(null, `${Date.now()}-${file.originalname}-${uuidv4()}`)
+        cb(null, `${Date.now()}|${uuidv4()}-${file.originalname}`)
     }
 })
 
