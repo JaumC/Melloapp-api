@@ -2,10 +2,13 @@ import { Request, Response } from "express";
 import User from "../../models/User";
 
 export const update_user = async (req: Request, res: Response) => {
-    const { email, nickname, name, profilePic } = req.body;
+    const { email, nickname, name } = req.body;
     const { id } = req.params;
+    const file = req.file;
+
+    console.log('bateu no update')
     
-    if (!email || !nickname || !name || !profilePic || !id) {
+    if (!email || !nickname || !name || !id) {
         res.status(400).json({ message: 'Campos faltando.' });
         return
     }
@@ -20,7 +23,7 @@ export const update_user = async (req: Request, res: Response) => {
         nickname: nickname,
         name: name,
         email: email,
-        profilePic: profilePic,
+        profilePic: file?.path,
     });
 
     if(!update_user) {

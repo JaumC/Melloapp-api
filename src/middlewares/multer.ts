@@ -1,6 +1,7 @@
 import multer, { FileFilterCallback } from 'multer'
-import path from 'path'
+import { v4 as uuidv4 } from 'uuid'
 import { Request } from 'express'
+import path from 'path'
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -9,7 +10,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         console.log('Salvando Arquivo: ', file.originalname)
-        cb(null, `${Date.now()}-${file.originalname}`)
+        cb(null, `${Date.now()}-${file.originalname}-${uuidv4()}`)
     }
 })
 

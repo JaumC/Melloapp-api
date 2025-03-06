@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
 export const create_user = async (req: Request, res: Response) => {
-    
     const { email, password, nickname, name } = req.body;
     const file = req.file;
 

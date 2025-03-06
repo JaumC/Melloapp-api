@@ -6,8 +6,6 @@ import jwt from 'jsonwebtoken';
 export const login_user = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  console.log(email, password);
-
   if (!email || !password) {
     res.status(400).json({ message: 'Campos faltando.' });
     return
@@ -39,7 +37,7 @@ export const login_user = async (req: Request, res: Response) => {
       email: user.email,
       name: user.name,
       nickname: user.nickname,
-
+      profilePic: user.profilePic
     } 
   });
 }
