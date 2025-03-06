@@ -14,6 +14,6 @@ UserRouter.post('/create', upload.single('file'), create_user);
 UserRouter.post('/login', login_user);
 UserRouter.get('/read/:id', read_user);
 UserRouter.get('/photo/:id', get_user_photo);
-UserRouter.post('/update/:id', upload.single('file'), update_user);
+UserRouter.patch('/update', upload.single('file'), update_user);
 
 export default UserRouter;

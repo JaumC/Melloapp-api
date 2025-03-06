@@ -10,7 +10,7 @@ services:
       - /app/node_modules
     ports:
       - ${API_PORT}:${API_PORT}
-    restart: on-failure
+    restart: always
     command: npm run dev
     depends_on:
       - mello-db
