@@ -37,7 +37,10 @@ export const login_user = async (req: Request, res: Response) => {
       email: user.email,
       name: user.name,
       nickname: user.nickname,
-      profilePic: user.profilePic
+      profilePic: user.profilePic,
+      competition: user.competition,
+      tot_score: user.tot_score,
+      search_id: user.search_id,
     } 
   });
 }
