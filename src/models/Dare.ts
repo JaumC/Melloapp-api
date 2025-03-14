@@ -6,37 +6,35 @@ const DareSchema = new Schema({
         type: String,
         required: true,
     },
-    date:{
-        start:{
-            type: Date,
-            required: true,
-        },
-        end:{
-            type: Date,
-            required: true,
-        }
+    start_date:{
+        type: Date,
+        required: true,
     },
-    challenger: {
-        type: Boolean,
+    end_date:{
+        type: Date,
+        required: true,
+    },
+    days:{
+        type: String,
+        require: true,
+    },
+    friends: {
+        type: String,
         required: true,
     },
     weekend: {
         type: Boolean,
         required: true,
     },
-    password: {
-        type: String,
-        required: true,
-    },
     day_squence: {
         type: String,
         required: true,
     },
-    month_squence: {
+    mounth_squence: {
         type: String,
         required: true,
     },
-    score: {
+    streak: {
         type: String,
         required: true,
     },

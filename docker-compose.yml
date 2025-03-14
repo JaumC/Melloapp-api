@@ -39,7 +39,7 @@ services:
     depends_on:
       - mello-db
     ports:
-      - "8081:8081"
+      - "8082:8082"
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://root:admin123@mello-db:27017/?authSource=admin
       ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
