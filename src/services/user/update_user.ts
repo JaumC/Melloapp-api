@@ -5,8 +5,6 @@ export const update_user = async (req: Request, res: Response) => {
     const { email, nickname, name } = req.body;
     const { id } = req.params;
 
-    console.log('id do user lek', id)
-
     const user = await User.findById(id)
     if (!user){
         res.status(404).json({message: 'Usuário não encontrado'})
