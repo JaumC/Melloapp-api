@@ -18,7 +18,7 @@ export const get_all_users = async (req: Request, res: Response) => {
       const users = await User.find({
         _id: { $ne: id },  
         ...searchQuery  
-      }).select('_id nickname profilePic search_id');
+      }).select('_id nickname search_id');
   
       if (users.length === 0) {
         res.status(404).json({ message: 'Nenhum usuário encontrado.' });
