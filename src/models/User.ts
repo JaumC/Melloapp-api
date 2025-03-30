@@ -36,6 +36,11 @@ const UserSchema = new Schema({
             type: String,
             required: true,
         },
+        friends: {
+            type: [Schema.Types.ObjectId],
+            ref: 'User',
+            default: []
+        }
     });
 
 export default mongoose.model('User', UserSchema);

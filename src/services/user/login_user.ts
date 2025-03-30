@@ -41,6 +41,7 @@ export const login_user = async (req: Request, res: Response) => {
       competition: user.competition,
       tot_score: user.tot_score,
       search_id: user.search_id,
+      friends: user.friends,
     } 
   });
 }
