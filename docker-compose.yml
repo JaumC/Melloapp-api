@@ -11,6 +11,8 @@ services:
     ports:
       - ${API_PORT}:${API_PORT}
     restart: always
+    networks:
+      - mello-network
     command: npm run dev
     depends_on:
       - mello-db
@@ -19,8 +21,10 @@ services:
 
   mello-db:
     container_name: mello-db
-    image: mongo
+    image: mongo:4.2 #Retire a versão para maquinas com processador atual || mongo:4.2 ou mongo
     restart: always
+    networks:
+      - mello-network
     env_file:
       - .env
     ports:
@@ -36,10 +40,12 @@ services:
     container_name: mongo_express
     image: mongo-express
     restart: always
+    networks:
+      - mello-network
     depends_on:
       - mello-db
     ports:
-      - "8082:8082"
+      - "8082:8081"
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://root:admin123@mello-db:27017/?authSource=admin
       ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
@@ -47,3 +53,7 @@ services:
 
 volumes:
   mello-db-data:
+
+networks:
+  mello-network:
+    driver: bridge
