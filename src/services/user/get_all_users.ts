@@ -3,7 +3,6 @@ import User from "../../models/User";
 
 export const get_all_users = async (req: Request, res: Response) => {
     const { id, search } = req.query; 
-    console.log('entrou no readall', id, search);
   
     try {
       const searchQuery = search 
@@ -25,8 +24,6 @@ export const get_all_users = async (req: Request, res: Response) => {
         return;
       }
 
-      console.log('users', users);
-  
       res.status(200).json({ message: 'Usuários encontrados com sucesso.', users });
     } catch (error) {
       console.error(error);

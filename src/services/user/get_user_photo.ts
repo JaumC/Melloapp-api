@@ -5,8 +5,6 @@ import fs from 'fs';
 export const get_user_photo = async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    console.log('id da foto', id)
-    
     const user = await User.findById(id).select('profilePic');
 
     if(!user){

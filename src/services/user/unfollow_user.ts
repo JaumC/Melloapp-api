@@ -11,7 +11,7 @@ export const unfollow_user = async (req: Request, res: Response) => {
         return
     }
 
-    if (friendId && friendId !== "" && !user.friends.includes(friendId)) {
+    if (friendId && friendId !== "" && user.friends.includes(friendId)) {
         user.friends = user.friends.filter(friend => friend != friendId);
     } else {
         res.status(400).json({ message: "Amigo não existe na lista ou ID inválido" });

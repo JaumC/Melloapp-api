@@ -9,6 +9,7 @@ import { login_user } from '../../services/user/login_user';
 import { get_user_photo } from '../../services/user/get_user_photo';
 import { follow_user } from '../../services/user/follow_user';
 import { unfollow_user } from '../../services/user/unfollow_user';
+import { get_friends } from '../../services/user/get_friends';
 
 const UserRouter = Router();
 
@@ -16,6 +17,7 @@ UserRouter.post('/create', upload.single('file'), create_user);
 UserRouter.post('/login', login_user);
 
 UserRouter.get('/readall', get_all_users);
+UserRouter.get('/readfriends', get_friends);
 UserRouter.get('/photo/:id', get_user_photo);
 
 UserRouter.patch('/update/:id', upload.single('file'), update_user);
