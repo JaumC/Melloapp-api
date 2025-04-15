@@ -94,15 +94,15 @@ O arquivo `.env` deve conter as seguintes variáveis de ambiente:
 Exemplo de um arquivo `.env`:
 
 ```
-MONGO_INITDB_DATABASE=db
+MONGO_INITDB_DATABASE=mello-db
 MONGO_INITDB_ROOT_USERNAME=root
-MONGO_INITDB_ROOT_PASSWORD=root123
+MONGO_INITDB_ROOT_PASSWORD=admin123
 
 API_PORT=7272
 
 SECRET=secret
 
-CONNECTION_STRING=mongodb://root:root123@db:27017/?authSource=admin
+CONNECTION_STRING=mongodb://root:admin123@mello-db:27017/mello-db?authSource=admin
 ```
 
 ## 📂 Estrutura do Projeto
