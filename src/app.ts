@@ -10,7 +10,7 @@ import http from 'http';
 dotenv.config();
 
 const app = express();
-const port = process.env.API_PORT || 3000;
+const port = parseInt(process.env.API_PORT || '3000', 10);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,6 +26,6 @@ const server = http.createServer(app);
 
 app.use('/', router);
 
-server.listen(port, () => {
+server.listen(port, '0.0.0.0', () => {
     console.log(`Server is running on port ${port}`);
 });
