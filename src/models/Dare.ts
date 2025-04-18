@@ -6,31 +6,36 @@ const DareSchema = new Schema({
         type: String,
         required: true,
     },
+    host:{
+        type: String,
+        required: true,
+    },
     start_date:{
-        type: Date,
+        type: String,
         required: true,
     },
     end_date:{
-        type: Date,
+        type: String,
         required: true,
     },
     days:{
         type: String,
         require: true,
     },
-    friends: {
-        type: String,
-        required: true,
+    challengers: {
+        type: [Schema.Types.ObjectId],
+        ref: 'User',
+        default: []
     },
     weekend: {
         type: Boolean,
         required: true,
     },
-    day_squence: {
+    day_sequency: {
         type: String,
         required: true,
     },
-    mounth_squence: {
+    mounth_sequency: {
         type: String,
         required: true,
     },

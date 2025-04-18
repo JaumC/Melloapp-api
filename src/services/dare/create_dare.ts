@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import Dare from "../../models/Dare";
 
 export const create_dare = async (req: Request, res: Response) => {
-    const { name, startDate, endDate, days, weekend, friends, sequencyDay, sequencyMounth, streak } = req.body;
+    const { name, startDate, endDate, days, weekend, friends, sequencyDay, sequencyMounth, streak, host } = req.body;
 
-    if (!name || !startDate || !endDate || !days || !weekend || !friends || !sequencyDay || !sequencyMounth || !streak) {
+    if (!name || !startDate || !host || !endDate || !days || !friends || !sequencyDay || !sequencyMounth || !streak) {
         res.status(400).json({ message: 'Campos faltando.' });
         return;
     }
@@ -16,7 +16,8 @@ export const create_dare = async (req: Request, res: Response) => {
         streak: streak,
         days: days,
         weekend: weekend,
-        friends: friends,
+        challengers: friends,
+        host: host,
         day_sequency: sequencyDay,
         mounth_sequency: sequencyMounth,
 
