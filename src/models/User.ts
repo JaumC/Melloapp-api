@@ -36,6 +36,10 @@ const UserSchema = new Schema({
             type: String,
             required: true,
         },
+        color: {
+            type: String,
+            default: '#000000',
+        },
         friends: {
             type: [Schema.Types.ObjectId],
             ref: 'User',

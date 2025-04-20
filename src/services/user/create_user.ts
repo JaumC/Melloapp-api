@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import User from "../../models/User";
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
+import color_generate from "../../utils/color_generate"
 
 export const create_user = async (req: Request, res: Response) => {
     const { email, password, nickname, name } = req.body;
@@ -17,6 +18,12 @@ export const create_user = async (req: Request, res: Response) => {
         return;
     }
 
+    let color = await color_generate()
+
+    while (await User.findOne({ color: color })) {
+            color = await color_generate()
+    }
+
     const salt = await bcrypt.genSalt();
     const pass_hashed = await bcrypt.hash(password, salt);
 
@@ -29,6 +36,7 @@ export const create_user = async (req: Request, res: Response) => {
         password: pass_hashed,
         profilePic: file?.path,
         search_id: search_id,
+        color: color,
     });
 
     if (!new_user) {

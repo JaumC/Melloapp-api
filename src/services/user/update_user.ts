@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import User from "../../models/User";
 
 export const update_user = async (req: Request, res: Response) => {
-    const { email, nickname, name } = req.body;
+    const { email, nickname, name, color } = req.body;
     const { id } = req.params;
 
     const user = await User.findById(id)
@@ -25,6 +25,10 @@ export const update_user = async (req: Request, res: Response) => {
         user.email = email;
     }
 
+    if(color || color !== '') {
+        user.color = color;
+    }
+
     if(nickname || nickname !== '') {
         user.nickname = nickname;
     }
@@ -45,6 +49,7 @@ export const update_user = async (req: Request, res: Response) => {
             search_id: user.search_id,
             competition: user.competition,
             tot_score: user.tot_score,
+            color: user.color,
         }
      });
 }
