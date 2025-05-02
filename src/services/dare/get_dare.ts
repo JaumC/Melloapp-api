@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Dare from "../../models/Dare";
 import User from "../../models/User";
+import DayPoint from "../../models/DayPoint";
 
 export const get_dare = async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -24,8 +25,15 @@ export const get_dare = async (req: Request, res: Response) => {
     })
 
     if (!dare) {
-        res.status(404).json({ message: 'Desafio não encnontrado.' })
+        res.status(404).json({ message: 'Desafio não encontrado.' })
         return;
     }
-    res.status(200).json({ dare });
+
+    const dayPoint = await DayPoint.find({ dare_id: { $in: dare.map(d => d._id) } })
+    if (!dayPoint) {
+        res.status(404).json({ message: 'Pontos diários não encontrados.' })
+        return;
+    }
+
+    res.status(200).json({ dare, dayPoint });
 }

@@ -21,7 +21,7 @@ export const create_user = async (req: Request, res: Response) => {
     let color = await color_generate()
 
     while (await User.findOne({ color: color })) {
-            color = await color_generate()
+        color = await color_generate()
     }
 
     const salt = await bcrypt.genSalt();

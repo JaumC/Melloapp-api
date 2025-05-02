@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import User from "../../models/User";
 import bcrypt from "bcryptjs";
 
-export const recuperar_user = async (req: Request, res: Response) => {
+export const recover_user = async (req: Request, res: Response) => {
 
     const { email, confirmarSenha } = req.body;
 

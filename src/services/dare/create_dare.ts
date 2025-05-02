@@ -1,32 +1,52 @@
 import { Request, Response } from "express";
 import Dare from "../../models/Dare";
+import DayPoint from "../../models/DayPoint";
+import moment from 'moment';
 
 export const create_dare = async (req: Request, res: Response) => {
-    const { name, startDate, endDate, days, weekend, friends, sequencyDay, sequencyMounth, streak, host } = req.body;
+    const { name, start_date, end_date, days, weekend, friends, sequencyDay, sequencyMounth, streak, host } = req.body;
 
-    if (!name || !startDate || !host || !endDate || !days || !friends || !sequencyDay || !sequencyMounth || !streak) {
+    if (!name || !start_date || !host || !end_date || !days || !friends || !sequencyDay || !sequencyMounth || !streak) {
         res.status(400).json({ message: 'Campos faltando.' });
         return;
     }
 
-    const new_dare = await Dare.create({
-        name: name,
-        start_date: startDate,
-        end_date: endDate,
-        streak: streak,
-        days: days,
-        weekend: weekend,
-        challengers: friends,
-        host: host,
-        day_sequency: sequencyDay,
-        mounth_sequency: sequencyMounth,
+    try {
+        const new_dare = await Dare.create({
+            name,
+            start_date: start_date,
+            end_date: end_date,
+            streak,
+            days,
+            weekend,
+            challengers: friends,
+            host,
+            day_sequency: sequencyDay,
+            mounth_sequency: sequencyMounth,
+        });
 
-    });
+        // Gerar o objeto "days"
+        const daysMap: Record<string, any[]> = {};
+        let current = moment(start_date, "DD/MM/YYYY");
+        const end = moment(end_date, "DD/MM/YYYY");
 
-    if (!new_dare) {
+        while (current.isSameOrBefore(end)) {
+            const dayOfWeek = current.isoWeekday();
+            if (weekend || (dayOfWeek >= 1 && dayOfWeek <= 5)) {
+                const dateStr = current.format("YYYY-MM-DD");
+                daysMap[dateStr] = []; // Array vazio de challengers
+            }
+            current.add(1, 'day');
+        }
+
+        await DayPoint.create({
+            dare_id: new_dare._id,
+            days: daysMap
+        });
+
+        res.status(201).json({ message: 'Desafio criado com sucesso.' });
+
+    } catch (error) {
         res.status(500).json({ message: 'Erro ao criar desafio.' });
-        return;
     }
-
-    res.status(201).json({ message: 'Desafio criado com sucesso.' });
-}
+};
