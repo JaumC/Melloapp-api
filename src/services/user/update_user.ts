@@ -7,7 +7,7 @@ export const update_user = async (req: Request, res: Response) => {
 
     const user = await User.findById(id)
     if (!user){
-        res.status(404).json({message: 'Usuário não encontrado'})
+        res.status(404).json({message: 'Usuário não encontrado.'})
         return;
     }
 
@@ -17,21 +17,10 @@ export const update_user = async (req: Request, res: Response) => {
         return
     }
     
-    if(name || name !== '') {
-        user.name = name;
-    }
-
-    if(email || email !== '') {
-        user.email = email;
-    }
-
-    if(color || color !== '') {
-        user.color = color;
-    }
-
-    if(nickname || nickname !== '') {
-        user.nickname = nickname;
-    }
+    if(name || name !== '') user.name = name;
+    if(email || email !== '') user.email = email;
+    if(color || color !== '') user.color = color;
+    if(nickname || nickname !== '') user.nickname = nickname;
 
     if(req.file && req.file.path) {
         user.profilePic = req.file.path;

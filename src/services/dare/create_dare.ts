@@ -4,9 +4,9 @@ import DayPoint from "../../models/DayPoint";
 import moment from 'moment';
 
 export const create_dare = async (req: Request, res: Response) => {
-    const { name, start_date, end_date, days, weekend, friends, sequencyDay, sequencyMounth, streak, host } = req.body;
+    const { name, start_date, end_date, days, weekend, challengers, day_sequency, mounth_sequency, streak, host } = req.body;
 
-    if (!name || !start_date || !host || !end_date || !days || !friends || !sequencyDay || !sequencyMounth || !streak) {
+    if (!name || !start_date || !host || !end_date || !days || !challengers || !day_sequency || !mounth_sequency || !streak) {
         res.status(400).json({ message: 'Campos faltando.' });
         return;
     }
@@ -19,10 +19,10 @@ export const create_dare = async (req: Request, res: Response) => {
             streak,
             days,
             weekend,
-            challengers: friends,
+            challengers: challengers,
             host,
-            day_sequency: sequencyDay,
-            mounth_sequency: sequencyMounth,
+            day_sequency: day_sequency,
+            mounth_sequency: mounth_sequency,
         });
 
         // Gerar o objeto "days"
