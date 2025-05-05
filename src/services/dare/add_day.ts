@@ -1,9 +1,15 @@
 import { Request, Response } from "express";
 import DayPoint from "../../models/DayPoint";
+import Dare from "../../models/Dare";
 
 export const add_day = async (req: Request, res: Response) => {
     try {
         const { userId, dareId, data } = req.body;
+
+        const streakData = await Dare.findOne({ _id: dareId }).select('streak');
+        const streak = streakData?.streak ?? 0;
+
+        console.log(streak)
 
         const dayPoint: any = await DayPoint.findOne({ dare_id: dareId });
         if (!dayPoint) {
@@ -24,8 +30,7 @@ export const add_day = async (req: Request, res: Response) => {
 
         challengers.push({
             user_id: userId,
-            marked_at: new Date(),
-            points: 1
+            points: 1 * Number(streak)
         });
         
         dayPoint.days.set(data, challengers);

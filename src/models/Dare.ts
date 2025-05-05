@@ -40,7 +40,7 @@ const DareSchema = new Schema({
         required: true,
     },
     streak: {
-        type: String,
+        type: Number,
         required: true,
     },
 });
